@@ -1,0 +1,865 @@
+/* ================================================================
+   VARIABLES GLOBALES
+   Paleta de colores y tipografías usadas en toda la página.
+   Cambiar un valor acá lo actualiza en todos lados automáticamente.
+================================================================ */
+:root {
+    --azul-oscuro:   #003F7F; /* Fondo principal de secciones oscuras */
+    --azul-medio:    #005BAD; /* Fondo de la franja de estadísticas */
+    --azul-celeste:  #0080D0; /* Color de acento principal */
+    --celeste-claro: #B3DEFF; /* Celeste claro para textos y detalles */
+    --fondo-claro:   #F0F8FF; /* Fondo de la sección talleres */
+    --texto-blanco:  #FFFFFF; /* Blanco puro */
+    --texto-oscuro:  #003060; /* Azul muy oscuro para textos sobre fondo claro */
+    --texto-suave:   #6EA8D4; /* Azul medio para etiquetas y labels */
+    --fuente-titulo: 'Cormorant Garamond', serif;  /* Tipografía elegante para títulos */
+    --fuente-cuerpo: 'DM Sans', sans-serif;         /* Tipografía moderna para cuerpo */
+}
+
+/* ================================================================
+   RESET Y BASE
+   Elimina márgenes y paddings por defecto del navegador.
+   El scroll-behavior suave activa la animación al hacer clic en links ancla.
+================================================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--azul-oscuro);
+    color: var(--texto-blanco);
+    font-family: var(--fuente-cuerpo);
+    overflow-x: hidden; /* Evita scroll horizontal */
+    cursor: none;       /* Oculta el cursor del sistema en desktop */
+}
+
+/* ================================================================
+   CURSOR — DESACTIVADO EN TOUCH
+   En celulares y tablets el cursor personalizado se oculta
+   y se restaura el cursor nativo del sistema.
+   Se usa la media query (hover: none) que detecta pantallas táctiles.
+================================================================ */
+@media (hover: none) and (pointer: coarse) {
+    body { cursor: auto; }
+    .cursor-dot, .cursor-ring { display: none !important; }
+}
+
+/* ================================================================
+   CURSOR PERSONALIZADO — ELEMENTOS VISUALES
+   .cursor-dot  → punto pequeño y preciso que sigue al mouse
+   .cursor-ring → anillo más grande que sigue con retraso suave (ver JS)
+================================================================ */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--celeste-claro);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none; /* No interfiere con clics */
+    z-index: 9999;
+    transform: translate(-50%, -50%); /* Centra el punto en la posición del mouse */
+}
+
+.cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(179, 222, 255, 0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+}
+
+/* ================================================================
+   FRANJA SUPERIOR (TOP BANNER)
+   Barra informativa de ancho completo con fondo celeste.
+   Texto en mayúsculas con letra-espaciado para estética institucional.
+================================================================ */
+.top-banner {
+    background: var(--azul-celeste);
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--texto-blanco);
+    font-weight: 500;
+}
+
+/* ================================================================
+   BARRA DE NAVEGACIÓN
+   Fija en la parte superior, encima del banner.
+   Al hacer scroll agrega la clase .scrolled (ver JS) que activa
+   el fondo con blur y borde inferior.
+================================================================ */
+.navbar {
+    position: fixed;
+    top: 36px; /* Deja espacio para el top-banner */
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.4s ease, padding 0.4s ease;
+}
+
+/* Estado de la navbar al hacer scroll */
+.navbar.scrolled {
+    background: rgba(0, 63, 127, 0.96); /* Fondo azul semitransparente */
+    backdrop-filter: blur(12px);         /* Efecto cristal/vidrio */
+    padding: 15px 60px;
+    border-bottom: 1px solid rgba(179, 222, 255, 0.15);
+}
+
+/* Links del menú de navegación */
+.nav-links {
+    display: flex;
+    gap: 45px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--texto-blanco);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.85;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    color: var(--celeste-claro);
+}
+
+/* Botón especial "Contacto" con borde y estilo CTA */
+.btn-nav-cta {
+    background: transparent !important;
+    border: 1px solid rgba(179, 222, 255, 0.6);
+    padding: 10px 26px !important;
+    color: var(--celeste-claro) !important;
+    opacity: 1 !important;
+    transition: background 0.3s ease, color 0.3s ease !important;
+}
+
+.btn-nav-cta:hover {
+    background: var(--celeste-claro) !important;
+    color: var(--azul-oscuro) !important;
+}
+
+/* ================================================================
+   SECCIÓN HERO (PORTADA)
+   Ocupa el 100% del alto de la ventana (100vh).
+   Contenido centrado vertical y horizontalmente.
+================================================================ */
+.hero {
+    height: 100vh;
+    min-height: 700px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Imagen de fondo del hero con filtro de oscurecimiento */
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('./tec1.png');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.3) saturate(0.7) hue-rotate(10deg); /* Oscurece y da tono azulado */
+    transform: scale(1.05); /* Ligeramente agrandada para el efecto zoom */
+    transition: transform 8s ease;
+}
+
+/* Al hacer hover sobre el hero la imagen hace un zoom out suave */
+.hero:hover .hero-bg {
+    transform: scale(1);
+}
+
+/* Degradado encima de la imagen para mejorar contraste del texto */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 63, 127, 0.5) 0%,    /* Oscuro arriba */
+        rgba(0, 63, 127, 0.05) 50%,  /* Casi transparente en el centro */
+        rgba(0, 63, 127, 0.7) 100%   /* Oscuro abajo */
+    );
+}
+
+/* Contenedor del texto central del hero */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Por encima del fondo y el overlay */
+    max-width: 900px;
+    padding: 0 40px;
+    animation: fadeInUp 1.2s ease both; /* Animación de entrada al cargar */
+}
+
+/* Texto pequeño decorativo sobre el título con líneas a los costados */
+.hero-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--celeste-claro);
+}
+
+/* Líneas decorativas a los costados del eyebrow (generadas con CSS) */
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--celeste-claro);
+    opacity: 0.6;
+}
+
+/* Título principal del hero — tamaño fluido con clamp() */
+.hero h1 {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(52px, 8vw, 100px); /* Mínimo 52px, ideal 8vw, máximo 100px */
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--texto-blanco);
+    margin-bottom: 30px;
+}
+
+/* Palabra en cursiva con color destacado */
+.hero h1 em {
+    font-style: italic;
+    color: var(--celeste-claro);
+    font-weight: 300;
+}
+
+/* Párrafo descriptivo bajo el título */
+.hero-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(240, 248, 255, 0.75);
+    max-width: 520px;
+    margin: 0 auto 45px;
+    font-weight: 300;
+}
+
+/* Botón principal del hero */
+.btn-hero {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--azul-oscuro);
+    background: var(--celeste-claro);
+    padding: 16px 50px;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-hero:hover {
+    background: var(--texto-blanco);
+    transform: translateY(-2px); /* Sube levemente al hacer hover */
+}
+
+/* ================================================================
+   FRANJA DE ESTADÍSTICAS
+   Fondo azul medio. Grilla de 3 columnas con separadores finos.
+================================================================ */
+.stats-strip {
+    background: var(--azul-medio);
+    padding: 60px 0;
+}
+
+.stats-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.1); /* Los gaps de 1px crean líneas separadoras */
+}
+
+/* Cada celda de estadística */
+.stat-item {
+    background: var(--azul-medio); /* Tapa el fondo del grid que forma las líneas */
+    padding: 40px;
+    text-align: center;
+}
+
+/* Número grande de la estadística */
+.stat-numero {
+    font-family: var(--fuente-titulo);
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--celeste-claro);
+    line-height: 1;
+    display: block;
+}
+
+/* Texto descriptivo debajo del número */
+.stat-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(179, 222, 255, 0.7);
+    margin-top: 10px;
+    display: block;
+}
+
+/* ================================================================
+   SECCIÓN TALLERES
+   Fondo claro para contrastar con las secciones azules.
+   Contiene el carrusel de tarjetas.
+================================================================ */
+.talleres-section {
+    background: var(--fondo-claro);
+    padding: 120px 0 80px;
+}
+
+/* Encabezado genérico de sección (usado también en contacto) */
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 0 40px;
+}
+
+/* Etiqueta pequeña sobre el título de sección */
+.section-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--azul-celeste);
+    margin-bottom: 20px;
+}
+
+/* Título de sección con tamaño fluido */
+.section-header h2 {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(38px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--texto-oscuro);
+}
+
+.section-header h2 em {
+    font-style: italic;
+    color: var(--azul-celeste);
+}
+
+/* ================================================================
+   CARRUSEL
+   El wrapper tiene padding lateral para que quepan los botones de flechas.
+   El container tiene overflow:hidden para recortar lo que no entra.
+   El slide (pista) se mueve con transform: translateX desde JS.
+================================================================ */
+.carousel-wrapper {
+    position: relative;
+    padding: 0 80px; /* Espacio para las flechas de navegación */
+}
+
+.carousel-container {
+    overflow: hidden; /* Oculta las tarjetas que salen del área visible */
+    padding: 20px 0 40px;
+}
+
+/* Contenedor flex de todas las tarjetas — se desplaza horizontalmente */
+.carousel-slide {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1); /* Animación suave con rebote */
+}
+
+/* ================================================================
+   TARJETAS DE TALLER
+   Cada tarjeta tiene imagen, overlay de hover y barra inferior con número.
+   Al hacer hover: sube, agranda y muestra el overlay azul.
+================================================================ */
+.card-taller {
+    min-width: calc(33.333% - 16px); /* 3 tarjetas visibles por defecto */
+    background: var(--texto-blanco);
+    border: 1px solid rgba(0, 128, 208, 0.15);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+    z-index: 1;
+}
+
+/* Efecto hover: sube, agranda y agrega sombra */
+.card-taller:hover {
+    transform: scale(1.04) translateY(-6px);
+    box-shadow: 0 25px 55px rgba(0, 63, 127, 0.2);
+    z-index: 10; /* Se pone encima de las tarjetas vecinas */
+    border-color: rgba(0, 128, 208, 0.4);
+}
+
+/* Contenedor de la imagen con altura fija */
+.card-img-wrap {
+    overflow: hidden;
+    height: 280px;
+    background: var(--fondo-claro);
+}
+
+/* Imagen de la tarjeta — object-fit contain para no recortarla */
+.card-taller img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 15px;
+    transition: transform 0.6s ease;
+}
+
+/* Zoom suave de la imagen al hacer hover en la tarjeta */
+.card-taller:hover img {
+    transform: scale(1.08);
+}
+
+/* Brillo azul semitransparente que aparece al hacer hover */
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 128, 208, 0.12) 0%,
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none; /* No interfiere con clics */
+}
+
+.card-taller:hover .card-overlay {
+    opacity: 1;
+}
+
+/* Barra inferior de la tarjeta con el número y la flecha */
+.card-info {
+    padding: 20px 24px 24px;
+    border-top: 1px solid rgba(0, 128, 208, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--texto-blanco);
+}
+
+/* Número grande y semitransparente del taller */
+.numero-taller {
+    font-family: var(--fuente-titulo);
+    font-size: 36px;
+    font-weight: 300;
+    color: rgba(0, 128, 208, 0.3);
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+/* El número se vuelve más vivo al hacer hover */
+.card-taller:hover .numero-taller {
+    color: var(--azul-celeste);
+}
+
+/* Flecha circular indicadora en la esquina de la tarjeta */
+.card-arrow {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(0, 128, 208, 0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--texto-suave);
+    transition: all 0.3s ease;
+}
+
+/* La flecha se rellena de azul al hacer hover */
+.card-taller:hover .card-arrow {
+    background: var(--azul-celeste);
+    border-color: var(--azul-celeste);
+    color: var(--texto-blanco);
+}
+
+/* ================================================================
+   BOTONES DE NAVEGACIÓN DEL CARRUSEL
+   Posicionados a los costados del wrapper.
+   Cambián a fondo sólido al hacer hover.
+================================================================ */
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    background: transparent;
+    border: 1px solid rgba(0, 128, 208, 0.4);
+    color: var(--azul-celeste);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background: var(--azul-celeste);
+    border-color: var(--azul-celeste);
+    color: var(--texto-blanco);
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* ================================================================
+   SECCIÓN CONTACTO
+   Fondo azul oscuro igual al hero.
+   El pseudo-elemento ::before genera el texto decorativo gigante de fondo.
+   Dividida en dos columnas: datos institucionales + formulario.
+================================================================ */
+.contacto-section {
+    background: var(--azul-oscuro);
+    padding: 120px 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Texto decorativo gigante de fondo (solo visual, no seleccionable) */
+.contacto-section::before {
+    content: 'CONTACTO';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--fuente-titulo);
+    font-size: clamp(80px, 15vw, 200px);
+    font-weight: 300;
+    color: rgba(179, 222, 255, 0.03); /* Casi invisible, solo textura */
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 10px;
+}
+
+/* Contenedor interior con ancho máximo centrado */
+.contacto-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Encabezado de la sección de contacto */
+.contacto-header {
+    margin-bottom: 80px;
+}
+
+/* Título grande de la sección contacto */
+.contacto-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(48px, 7vw, 90px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--texto-blanco);
+    margin: 20px 0 24px;
+}
+
+.contacto-titulo em {
+    font-style: italic;
+    color: var(--celeste-claro);
+}
+
+/* Subtítulo descriptivo */
+.contacto-subtitulo {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(179, 222, 255, 0.6);
+    font-weight: 300;
+}
+
+/* Grilla de dos columnas: info (más angosta) + formulario (más ancha) */
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    align-items: start;
+}
+
+/* ================================================================
+   COLUMNA DE DATOS INSTITUCIONALES
+   Lista de ítems con separadores horizontales entre ellos.
+================================================================ */
+.contacto-info {
+    padding-top: 10px;
+}
+
+/* Cada ítem de información (label + valor) */
+.info-item {
+    padding: 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Etiqueta pequeña en mayúsculas (ej: "Ubicación") */
+.info-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+}
+
+/* Valor del dato en tipografía de título (ej: "Villa María, Córdoba") */
+.info-value {
+    font-family: var(--fuente-titulo);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--texto-blanco);
+    letter-spacing: 1px;
+}
+
+/* Línea separadora entre ítems de información */
+.info-divider {
+    height: 1px;
+    background: rgba(179, 222, 255, 0.1);
+}
+
+/* ================================================================
+   FORMULARIO DE CONTACTO
+   Inputs minimalistas con solo borde inferior (estilo editorial).
+   Los labels están en la misma estética que las etiquetas de la página.
+================================================================ */
+.form-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 28px; /* Espacio entre campos */
+}
+
+/* Grupo de campo: label + input/select/textarea */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Label del campo en estilo institucional */
+.form-group label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+}
+
+/* Estilos compartidos para input, select y textarea */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: transparent;          /* Sin fondo — se integra al fondo oscuro */
+    border: none;
+    border-bottom: 1px solid rgba(179, 222, 255, 0.2); /* Solo borde inferior */
+    padding: 14px 0;
+    color: var(--texto-blanco);
+    font-family: var(--fuente-cuerpo);
+    font-size: 15px;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+/* Color del placeholder más suave */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(179, 222, 255, 0.25);
+}
+
+/* Estilo del select: oculta la flecha nativa y agrega una personalizada */
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236EA8D4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 24px;
+    cursor: pointer;
+}
+
+/* Fondo oscuro para las opciones del select (para que sean legibles) */
+.form-group select option {
+    background: var(--azul-oscuro);
+    color: var(--texto-blanco);
+}
+
+/* Borde inferior resaltado al hacer foco en un campo */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-bottom-color: var(--celeste-claro);
+}
+
+/* El textarea no es redimensionable */
+.form-group textarea {
+    resize: none;
+}
+
+/* Clase de error: borde rojo cuando el campo está vacío al intentar enviar */
+.input-error {
+    border-bottom-color: #FF6B6B !important;
+}
+
+/* ================================================================
+   BOTÓN ENVIAR
+   Estilo igual al botón de la navbar (contorno + relleno al hover).
+   Incluye flecha animada que se desplaza al hacer hover.
+================================================================ */
+.btn-enviar {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: transparent;
+    border: 1px solid rgba(179, 222, 255, 0.4);
+    color: var(--celeste-claro);
+    padding: 18px 40px;
+    font-family: var(--fuente-cuerpo);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    align-self: flex-start; /* No ocupa todo el ancho */
+    margin-top: 10px;
+}
+
+.btn-enviar:hover {
+    background: var(--celeste-claro);
+    color: var(--azul-oscuro);
+    transform: translateY(-2px);
+}
+
+/* Estado deshabilitado mientras se "envía" */
+.btn-enviar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Flecha → que se mueve hacia la derecha al hacer hover */
+.btn-arrow {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.btn-enviar:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+/* Clase que se agrega al botón durante el envío */
+.btn-enviar.enviando {
+    opacity: 0.6;
+}
+
+/* ================================================================
+   MENSAJE DE ÉXITO
+   Oculto por defecto (opacity: 0). Se muestra con JS al enviar.
+================================================================ */
+.form-success {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--celeste-claro);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    margin-top: 4px;
+}
+
+/* ================================================================
+   PIE DE PÁGINA (FOOTER)
+   Fondo azul oscuro con borde superior sutil.
+   Copyright a la izquierda, nombre de marca a la derecha.
+================================================================ */
+.footer {
+    background: var(--azul-oscuro);
+    padding: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(179, 222, 255, 0.1);
+}
+
+/* Texto de copyright en estilo institucional */
+.footer-copy {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+}
+
+/* Nombre de marca grande y semitransparente (decorativo) */
+.footer-brand {
+    font-family: var(--fuente-titulo);
+    font-size: 28px;
+    font-weight: 300;
+    color: rgba(179, 222, 255, 0.25);
+    letter-spacing: 4px;
+}
+
+/* ================================================================
+   ANIMACIÓN DE ENTRADA
+   Usada en el hero-content al cargar la página.
+   El elemento sube desde abajo y aparece gradualmente.
+================================================================ */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================================================
+   RESPONSIVE — TABLET (max 900px)
+   Reduce columnas del carrusel a 2 tarjetas,
+   pone las estadísticas en una sola columna
+   y reorganiza el footer en vertical.
+================================================================ */
+@media (max-width: 900px) {
+    .navbar { padding: 15px 30px; }
+    .navbar.scrolled { padding: 12px 30px; }
+    .card-taller { min-width: calc(50% - 12px); } /* 2 tarjetas visibles */
+    .stats-grid { grid-template-columns: 1fr; }    /* 1 columna */
+    .footer { flex-direction: column; gap: 20px; text-align: center; }
+    .carousel-wrapper { padding: 0 50px; }
+    .contacto-section { padding: 80px 30px; }
+    .contacto-grid { grid-template-columns: 1fr; gap: 50px; } /* 1 columna */
+}
+
+/* ================================================================
+   RESPONSIVE — MÓVIL (max 600px)
+   1 tarjeta visible en el carrusel.
+   Título del hero más pequeño.
+   Botón de envío a ancho completo.
+================================================================ */
+@media (max-width: 600px) {
+    .card-taller { min-width: 85%; } /* 1 tarjeta visible (con peek del siguiente) */
+    .hero h1 { font-size: 42px; }
+    .carousel-wrapper { padding: 0 40px; }
+    .contacto-section { padding: 60px 24px; }
+    .btn-enviar { width: 100%; justify-content: center; }
+}

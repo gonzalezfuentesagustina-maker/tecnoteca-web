@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnoteca | Innovación y Creatividad</title>
+
+    <!-- Fuentes de Google: Cormorant Garamond para títulos, DM Sans para el cuerpo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Hoja de estilos principal -->
+    <link rel="stylesheet" href="stile.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         CURSOR PERSONALIZADO
+         Dos elementos que reemplazan el cursor del sistema:
+         - cursor-dot: el punto pequeño que sigue al mouse exactamente
+         - cursor-ring: el anillo grande que sigue con un leve retraso (efecto suave)
+         En celulares y tablets se ocultan automáticamente
+    ============================================================ -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- ============================================================
+         FRANJA SUPERIOR (TOP BANNER)
+         Barra informativa fija en la parte superior de la página
+         Muestra novedades o información institucional breve
+    ============================================================ -->
+    <div class="top-banner">
+        Inscripciones abiertas &nbsp;·&nbsp; Nuevos talleres 2026 &nbsp;·&nbsp; Villa María
+    </div>
+
+    <!-- ============================================================
+         BARRA DE NAVEGACIÓN
+         Se vuelve semitransparente con blur al hacer scroll hacia abajo
+         Contiene los links internos y el botón de Contacto
+    ============================================================ -->
+    <header class="navbar" id="navbar">
+        <nav class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#talleres">Talleres</a>
+            <!-- Botón con estilo especial que lleva a la sección #contacto -->
+            <a href="#contacto" class="btn-nav-cta">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ============================================================
+             SECCIÓN HERO (PORTADA)
+             Ocupa el 100% de la pantalla al entrar a la página.
+             Tiene una imagen de fondo con filtro oscuro, un overlay degradado,
+             y el contenido central con título, descripción y botón CTA.
+        ============================================================ -->
+        <section id="inicio" class="hero">
+
+            <!-- Imagen de fondo con efecto de zoom al hacer hover -->
+            <div class="hero-bg"></div>
+
+            <!-- Degradado encima de la imagen para mejorar legibilidad del texto -->
+            <div class="hero-overlay"></div>
+
+            <!-- Contenido central del hero -->
+            <div class="hero-content">
+                <!-- Pequeño texto decorativo sobre el título principal -->
+                <div class="hero-eyebrow">Bienvenidos a la</div>
+
+                <!-- Título principal con palabra en cursiva y color destacado -->
+                <h1>Un espacio para <em>crecer,</em><br>aprender y crear</h1>
+
+                <!-- Descripción breve del proyecto -->
+                <p class="hero-desc">
+                    Tecnoteca es un universo pensado para despertar la curiosidad
+                    y fomentar la creatividad. Tecnología e innovación transforman
+                    ideas en proyectos reales.
+                </p>
+
+                <!-- Botón que lleva a la sección de talleres -->
+                <a href="#talleres" class="btn-hero">Explorar talleres</a>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             FRANJA DE ESTADÍSTICAS
+             Muestra 3 datos clave en una grilla horizontal:
+             cantidad de talleres, alumnos formados y año de inscripciones
+        ============================================================ -->
+        <div class="stats-strip">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-numero">11</span>
+                    <span class="stat-label">Talleres disponibles</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-numero">+500</span>
+                    <span class="stat-label">Alumnos formados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-numero">2026</span>
+                    <span class="stat-label">Inscripciones abiertas</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+             SECCIÓN TALLERES
+             Muestra las tarjetas de cada taller en un carrusel deslizable.
+             Fondo claro para contrastar con las secciones oscuras.
+        ============================================================ -->
+        <section id="talleres" class="talleres-section">
+
+            <!-- Encabezado de sección con etiqueta y título -->
+            <div class="section-header">
+                <span class="section-tag">Formación</span>
+                <h2>Nuestros <em>Talleres</em></h2>
+            </div>
+
+            <!-- Contenedor del carrusel con botones de navegación -->
+            <div class="carousel-wrapper">
+
+                <!-- Área visible del carrusel (overflow hidden para ocultar lo que no entra) -->
+                <div class="carousel-container">
+
+                    <!-- Pista del carrusel: se mueve horizontalmente con transform -->
+                    <div class="carousel-slide" id="track">
+
+                        <!-- ---- TARJETA TALLER 01 ---- -->
+                        <!-- Cada tarjeta tiene: imagen, overlay de hover y número -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller1.jpeg" alt="Taller 1"></div>
+                            <div class="card-overlay"></div><!-- Brillo azul al hacer hover -->
+                            <div class="card-info">
+                                <span class="numero-taller">01</span>
+                                <div class="card-arrow">›</div><!-- Flecha indicadora -->
+                            </div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 02 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller2.jpeg" alt="Taller 2"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">02</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 03 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller3.jpeg" alt="Taller 3"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">03</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 04 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller4.jpeg" alt="Taller 4"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">04</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 05 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller5.jpeg" alt="Taller 5"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">05</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 06 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller6.jpeg" alt="Taller 6"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">06</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 07 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller7.jpeg" alt="Taller 7"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">07</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 08 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller8.jpeg" alt="Taller 8"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">08</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 09 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller9.jpeg" alt="Taller 9"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">09</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 10 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller10.jpeg" alt="Taller 10"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">10</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                        <!-- ---- TARJETA TALLER 11 ---- -->
+                        <div class="card-taller">
+                            <div class="card-img-wrap"><img src="taller11.jpeg" alt="Taller 11"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-info"><span class="numero-taller">11</span><div class="card-arrow">›</div></div>
+                        </div>
+
+                    </div><!-- /carousel-slide -->
+                </div><!-- /carousel-container -->
+
+                <!-- Botones de navegación del carrusel (llaman a moveSlide en JS) -->
+                <button class="prev-btn" onclick="moveSlide(-1)">&#8592;</button>
+                <button class="next-btn" onclick="moveSlide(1)">&#8594;</button>
+
+            </div><!-- /carousel-wrapper -->
+        </section>
+
+        <!-- ============================================================
+             SECCIÓN CONTACTO
+             Formulario de contacto con la misma estética de la página.
+             Dividida en dos columnas: info institucional + formulario.
+             El texto de fondo gigante "CONTACTO" es decorativo (CSS ::before).
+        ============================================================ -->
+        <section id="contacto" class="contacto-section">
+            <div class="contacto-inner">
+
+                <!-- Encabezado de la sección de contacto -->
+                <div class="contacto-header">
+                    <span class="section-tag" style="color: var(--celeste-claro);">Escribinos</span>
+                    <h2 class="contacto-titulo">¿Querés saber<br><em>más?</em></h2>
+                    <p class="contacto-subtitulo">
+                        Completá el formulario y nos ponemos en contacto<br>a la brevedad.
+                    </p>
+                </div>
+
+                <!-- Grilla de dos columnas: datos + formulario -->
+                <div class="contacto-grid">
+
+                    <!-- Columna izquierda: datos institucionales -->
+                    <div class="contacto-info">
+                        <div class="info-item">
+                            <span class="info-label">Ubicación</span>
+                            <span class="info-value">Villa María, Córdoba</span>
+                        </div>
+                        <div class="info-divider"></div><!-- Línea separadora -->
+                        <div class="info-item">
+                            <span class="info-label">Inscripciones</span>
+                            <span class="info-value">Abiertas 2026</span>
+                        </div>
+                        <div class="info-divider"></div>
+                        <div class="info-item">
+                            <span class="info-label">Talleres</span>
+                            <span class="info-value">11 disponibles</span>
+                        </div>
+                        <div class="info-divider"></div>
+                        <div class="info-item">
+                            <span class="info-label">Desarrollado por</span>
+                            <span class="info-value">AGF Sistemas</span>
+                        </div>
+                    </div>
+
+                    <!-- Columna derecha: formulario de contacto -->
+                    <div class="form-wrap">
+
+                        <!-- Campo: Nombre -->
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" placeholder="Tu nombre">
+                        </div>
+
+                        <!-- Campo: Email -->
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" placeholder="correo@ejemplo.com">
+                        </div>
+
+                        <!-- Campo: Selector de taller de interés -->
+                        <div class="form-group">
+                            <label for="taller">Taller de interés</label>
+                            <select id="taller">
+                                <option value="" disabled selected>Seleccioná un taller</option>
+                                <option value="01">Taller 01</option>
+                                <option value="02">Taller 02</option>
+                                <option value="03">Taller 03</option>
+                                <option value="04">Taller 04</option>
+                                <option value="05">Taller 05</option>
+                                <option value="06">Taller 06</option>
+                                <option value="07">Taller 07</option>
+                                <option value="08">Taller 08</option>
+                                <option value="09">Taller 09</option>
+                                <option value="10">Taller 10</option>
+                                <option value="11">Taller 11</option>
+                            </select>
+                        </div>
+
+                        <!-- Campo: Mensaje libre -->
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?"></textarea>
+                        </div>
+
+                        <!-- Botón de envío (llama a enviarFormulario() en JS) -->
+                        <button class="btn-enviar" id="btnEnviar" onclick="enviarFormulario()">
+                            <span class="btn-text">Enviar mensaje</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+
+                        <!-- Mensaje de éxito, oculto por defecto, aparece al enviar -->
+                        <p class="form-success" id="formSuccess">¡Mensaje enviado! Nos contactaremos pronto.</p>
+
+                    </div><!-- /form-wrap -->
+                </div><!-- /contacto-grid -->
+            </div><!-- /contacto-inner -->
+        </section>
+
+    </main>
+
+    <!-- ============================================================
+         PIE DE PÁGINA (FOOTER)
+         Muestra copyright a la izquierda y el nombre de marca a la derecha
+    ============================================================ -->
+    <footer class="footer">
+        <span class="footer-copy">&copy; 2026 Tecnoteca · Villa María · AGF Sistemas</span>
+        <span class="footer-brand">TECNOTECA</span>
+    </footer>
+
+
+    <script>
+        // ============================================================
+        // CURSOR PERSONALIZADO
+        // Solo se activa en dispositivos de escritorio (no táctiles).
+        // isTouchDevice() detecta si el dispositivo usa touch mediante
+        // media queries y propiedades del navegador.
+        // ============================================================
+        const dot  = document.getElementById('cursorDot');
+        const ring = document.getElementById('cursorRing');
+
+        const isTouchDevice = () =>
+            window.matchMedia('(hover: none) and (pointer: coarse)').matches ||
+            ('ontouchstart' in window) ||
+            (navigator.maxTouchPoints > 0);
+
+        if (isTouchDevice()) {
+            // En touch: oculta los elementos del cursor y restaura el cursor nativo
+            dot.style.display  = 'none';
+            ring.style.display = 'none';
+            document.body.style.cursor = 'auto';
+        } else {
+            // En desktop: activa el cursor personalizado
+            let mouseX = 0, mouseY = 0; // Posición real del mouse
+            let ringX  = 0, ringY  = 0; // Posición del anillo (se actualiza suavemente)
+
+            // Mueve el punto exactamente donde está el mouse
+            document.addEventListener('mousemove', e => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dot.style.left = mouseX + 'px';
+                dot.style.top  = mouseY + 'px';
+            });
+
+            // Anima el anillo para que siga al mouse con un leve retraso (efecto suave)
+            function animateRing() {
+                ringX += (mouseX - ringX) * 0.12; // Interpolación suave
+                ringY += (mouseY - ringY) * 0.12;
+                ring.style.left = ringX + 'px';
+                ring.style.top  = ringY + 'px';
+                requestAnimationFrame(animateRing); // Loop continuo
+            }
+            animateRing();
+        }
+
+        // ============================================================
+        // NAVBAR CON EFECTO SCROLL
+        // Agrega la clase 'scrolled' cuando el usuario baja más de 60px,
+        // lo que activa el fondo semitransparente con blur en el CSS.
+        // ============================================================
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // ============================================================
+        // CARRUSEL DE TALLERES
+        // Mueve la pista (#track) usando transform: translateX().
+        // Detecta cuántas tarjetas son visibles según el ancho de pantalla
+        // y hace loop al llegar al principio o al final.
+        // ============================================================
+        let currentIndex = 0; // Índice de la tarjeta visible más a la izquierda
+
+        function moveSlide(step) {
+            const track      = document.getElementById('track');
+            const cards      = document.querySelectorAll('.card-taller');
+            const totalCards = cards.length;
+
+            // Cantidad de tarjetas visibles según el ancho de pantalla
+            let visibleCards = 3;
+            if (window.innerWidth <= 900) visibleCards = 2;
+            if (window.innerWidth <= 600) visibleCards = 1;
+
+            // Ancho de cada tarjeta + gap entre ellas
+            const cardWidth = cards[0].offsetWidth + 24;
+
+            currentIndex += step;
+
+            // Loop: si pasa del final vuelve al inicio, y viceversa
+            if (currentIndex > totalCards - visibleCards) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = totalCards - visibleCards;
+
+            // Aplica el desplazamiento
+            track.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
+        }
+
+        // ============================================================
+        // FORMULARIO DE CONTACTO
+        // Valida que todos los campos estén completos antes de "enviar".
+        // Resalta en rojo los campos vacíos.
+        // Al enviar correctamente muestra un mensaje de éxito y oculta el botón.
+        // NOTA: actualmente es solo frontend (no envía datos a ningún servidor).
+        // Para conectarlo, reemplazar el setTimeout por un fetch() a tu backend.
+        // ============================================================
+        function enviarFormulario() {
+            const campos = ['nombre', 'email', 'taller', 'mensaje'];
+            let valido = true;
+
+            // Recorre cada campo y marca en rojo los que estén vacíos
+            campos.forEach(id => {
+                const el    = document.getElementById(id);
+                const vacio = !el.value.trim();
+                el.classList.toggle('input-error', vacio);
+                if (vacio) valido = false;
+            });
+
+            // Si hay campos vacíos, detiene el envío
+            if (!valido) return;
+
+            // Simula el envío: deshabilita el botón y muestra el mensaje de éxito
+            const btn = document.getElementById('btnEnviar');
+            btn.disabled = true;
+            btn.classList.add('enviando');
+
+            setTimeout(() => {
+                btn.style.display = 'none';
+                document.getElementById('formSuccess').style.opacity = '1';
+            }, 800); // Espera 800ms antes de mostrar el mensaje (simula una petición)
+        }
+    </script>
+
+</body>
+</html>
